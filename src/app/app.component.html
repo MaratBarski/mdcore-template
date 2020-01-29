@@ -1,0 +1,75 @@
+<mdc-svg-loader></mdc-svg-loader>
+<div style="margin:10px auto;width:960px">
+    <div style="display:flex">
+        <div>
+            <div style="margin: 10px;">
+                <img style="width:150px" src="./assets/img/logo.jpg"/>
+            </div>
+            <div class="b" *ngFor="let c of components" (click)="showComponent(c.name)">
+                {{c.name}}
+            </div>
+        </div>
+        <div style="margin-left: 10px;margin-right: 10px;">
+            <div [hidden]="currentComponent!=='Tabulator'" class="cmp">
+                <h1>Tabulator</h1>
+                <mdc-tabs [active]="tabActive" [tabs]="tabs" (select)="selectTab($event)"></mdc-tabs>
+                <div *ngFor="let tab of tabs;let index = index" [hidden]="index!==tabActive">
+                    <div style="padding: 20px;">
+                        {{tab.text}}
+                    </div>
+                </div>
+            </div>
+            <div [hidden]="currentComponent!=='Button'" class="cmp">
+                <h1>Button</h1>
+                <mdc-button (click)="btnClick()" text="test btn"></mdc-button>
+            </div>
+            <div [hidden]="currentComponent!=='CheckBox list'" class="cmp">
+                <h1>CheckBox list</h1>
+                <mdc-check-box-list (cancel)="cancel()" (apply)="apply()" [options]="chbOptions">
+                </mdc-check-box-list>
+            </div>
+            <div [hidden]="currentComponent!=='Search'" class="cmp">
+                <h1>Search</h1>
+                <mdc-auto-search minLength="1" pause="500" placeholder="{{'search'|translate}}" (complite)="serachComplite($event)">
+                </mdc-auto-search>
+                Serach text:&nbsp;{{serachText}}
+            </div>
+            <div [hidden]="currentComponent!=='Split button'" class="cmp">
+                <h1>Split button</h1>
+                <mdc-split-button (actionClick)="actionClick($event)" [actions]="buttonActions" text="split button">
+                </mdc-split-button>
+            </div>
+            <div [hidden]="currentComponent!=='Toggle'" class="cmp">
+                <h1>Toggle</h1>
+                <div style="margin: 20px;">
+                    <mdc-toggle-button no="Off" yes="{{'On'|translate}}" [(ngModel)]="isSwitched"></mdc-toggle-button>
+                    {{isSwitched}}
+                </div>
+                <div style="margin: 20px;">
+                    <mdc-toggle-button no="No" yes="Yes" [(ngModel)]="isSwitched1"></mdc-toggle-button>
+                    {{isSwitched1}}
+                </div>
+            </div>
+             <div [hidden]="currentComponent!=='Icons'" class="cmp">
+                <h1>Icons</h1>
+                <div class="type-icon">
+                    <div *ngFor="let icon of icons" class="type-icon__item">
+                        <div class="type-icon__img">
+                            <mdc-icon [path]="icon.path"></mdc-icon>
+                        </div>
+                        <div class="type-icon__name">{{icon.path}}</div>
+                    </div>
+                </div>
+             </div>
+             <div [hidden]="currentComponent!=='Combobox'" class="cmp">
+                <h1>Combobox</h1>
+                <mdc-select [selected]="selectedOption" (changed)="changed($event)" [options]="selectOptions"></mdc-select>
+            </div>
+            <div [hidden]="currentComponent!=='Login'" class="cmp">
+                <h1>Login</h1>
+                <mdc-login (fail)="loginFail($event)" (success)="afterLogin()"></mdc-login>
+                <mdc-logout></mdc-logout>
+            </div>
+        </div>
+    </div>
+</div>
